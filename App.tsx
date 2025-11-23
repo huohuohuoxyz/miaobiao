@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStopwatch } from './hooks/useStopwatch';
-import AnalogClock from './components/AnalogClock';
 import LapList from './components/LapList';
 import { StopwatchState } from './types';
 import { formatTime } from './utils';
@@ -17,24 +16,20 @@ const App: React.FC = () => {
   const isIdle = state === StopwatchState.IDLE;
 
   return (
-    <div className="h-screen w-full bg-black text-white flex flex-col items-center overflow-hidden">
+    <div className="fixed inset-0 w-full bg-black text-white flex flex-col items-center overflow-hidden">
       
       {/* Content Area */}
-      <div className="flex-1 w-full max-w-lg flex flex-col relative">
+      <div className="flex-1 w-full max-w-lg flex flex-col relative overflow-hidden">
         
         {/* Top Digital Readout (Large) */}
-        <div className="pt-16 pb-4 flex flex-col items-center justify-center min-h-[300px]">
-           {/* Swipe indicator logic could go here to toggle Analog/Digital, but we'll show Analog by default with digital small underneath or inside */}
-           
-           <AnalogClock elapsed={elapsed} />
-           
-           <div className="mt-8 text-5xl font-light tracking-wider font-variant-numeric tabular-nums">
+        <div className="flex-1 max-h-[40vh] min-h-[200px] flex flex-col items-center justify-center shrink-0">
+           <div className="text-7xl font-thin tracking-tight font-variant-numeric tabular-nums">
               {formatTime(elapsed)}
            </div>
         </div>
 
         {/* Controls */}
-        <div className="flex justify-between items-center w-full px-8 pb-4">
+        <div className="flex justify-between items-center w-full px-8 pb-8 shrink-0">
             {/* Left Button (Lap / Reset) */}
             <button
               onClick={isRunning ? lap : reset}
@@ -46,12 +41,6 @@ const App: React.FC = () => {
             >
                {isRunning ? '计次' : '复位'}
             </button>
-
-            {/* Page indicator dots (Visual only) */}
-            <div className="flex space-x-2 opacity-50">
-               <div className="w-2 h-2 rounded-full bg-white"></div>
-               <div className="w-2 h-2 rounded-full bg-gray-600"></div>
-            </div>
 
             {/* Right Button (Start / Stop) */}
             <button
@@ -73,7 +62,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Lap List */}
-        <div className="flex-1 w-full border-t border-gray-900 bg-black z-10">
+        <div className="flex-1 w-full border-t border-gray-900 bg-black z-10 flex flex-col min-h-0 relative">
             <LapList 
                 laps={laps} 
                 currentRunningLapTime={currentLapDuration} 

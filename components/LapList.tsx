@@ -28,7 +28,7 @@ const LapList: React.FC<LapListProps> = ({ laps, currentRunningLapTime, isRunnin
   const currentLapIndex = laps.length + 1;
 
   return (
-    <div className="flex-1 overflow-y-auto w-full max-w-md mx-auto px-4 mt-4 pb-24">
+    <div className="h-full overflow-y-auto w-full max-w-md mx-auto px-4 pt-4 pb-4">
       <table className="w-full text-lg">
         <tbody>
           {/* Current Live Lap (Phantom Row) */}
